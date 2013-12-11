@@ -1,0 +1,19 @@
+#!/bin/bash
+
+TMPFIFO=/tmp/$$
+
+mkfifo $TMPFIFO
+( logger -t senode <$TMPFIFO ) &
+exec >&$TMPFIFO
+rm $TMPFIFO
+export DISPLAY=:1
+exec /usr/bin/java -jar /opt/selenium/selenium-server-standalone.jar \
+    -role node \
+    -hub http://localhost:4444/grid/register \
+    -Dwebdriver.chrome.driver=/usr/local/bin/chromedriver \
+    -browser browserName=firefox,version=25.0.1,maxInstances=3,platform=LINUX \
+    -browser browserName=chrome,version=31.0.1650.63,maxInstances=3,platform=LINUX &
+
+exec /usr/local/bin/phantomjs --webdriver=9191 --max-disk-cache-size=10240 --disk-cache=true --webdriver-selenium-grid-hub=http://localhost:4444 &
+exec /usr/local/bin/phantomjs --webdriver=9192 --max-disk-cache-size=10240 --disk-cache=true --webdriver-selenium-grid-hub=http://localhost:4444 &
+exec /usr/local/bin/phantomjs --webdriver=9193 --max-disk-cache-size=10240 --disk-cache=true --webdriver-selenium-grid-hub=http://localhost:4444 &
