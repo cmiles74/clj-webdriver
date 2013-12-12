@@ -126,6 +126,9 @@ may easily be provisioned.
 vagrant up
 ```
 
+You may access the project from the `/vagrant` directory, this is a
+shared folder providing direct access to this project's folder.
+
 After Vagrant completes setting up the machine, you will have a
 virtual machine running Ubuntu Precise 32-bit with Selenium Grid and
 the browsers installed and configured. You may access the grid at
