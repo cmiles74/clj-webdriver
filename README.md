@@ -126,15 +126,24 @@ may easily be provisioned.
 vagrant up
 ```
 
-You may access the project from the `/vagrant` directory, this is a
-shared folder providing direct access to this project's folder.
-
 After Vagrant completes setting up the machine, you will have a
 virtual machine running Ubuntu Precise 32-bit with Selenium Grid and
 the browsers installed and configured. You may access the grid at
 `http://172.16.202.120:444`, this address will be visible ony to your
 local machine. A VNC server is also available for monitoring the
 progress of your tests at `172.16.202.120:1`, password '123qwe'.
+
+You can log into the virtual machine via vagrant. You may access the
+project from the `/vagrant` directory, this is a shared folder
+providing direct access to this project's folder. From there you may
+run the tests.
+
+```
+vagrant ssh
+...Logs into virtual maching...
+cd /vagrant
+script/test remote
+```
 
 Thank you to [Cees de Groot](cg@cdegroot.com) for the
 [Vagrant Selenium Grid project](https://github.com/cdegroot/vagrant-selenium-grid).
