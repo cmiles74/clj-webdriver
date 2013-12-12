@@ -109,6 +109,33 @@ The `core` option runs tests against the core API's using Firefox and Chrome. Th
  * Evaluate `(use 'clj-webdriver.test.example-app.core 'ring.adapter.jetty)`
  * Evaluate `(defonce my-server (run-jetty #'routes {:port 5744, :join? false}))`, making sure to adjust the `test-port` in `test/clj_webdriver/test/core.clj` to whatever you use here.
 
+## Testing with Selenium Grid ##
+
+This project includes a Vagrant project that will provide a virtual
+machine running Selenium Grid with Firefox, Chromium and PhantomJS
+clients. This may be used for testing across browsers without having
+to install and configure these browsers on your development
+machine. In addition, it ensures a baseline environment for
+testing. More informationg about installing Vagrant (and VirtualBox)
+may be found at [the Vagrant website](http://www.vagrantup.com/).
+
+Once Vagrant and VirtualBox have been installed, the virtual machine
+may easily be provisioned.
+
+```
+vagrant up
+```
+
+After Vagrant completes setting up the machine, you will have a
+virtual machine running Ubuntu Precise 32-bit with Selenium Grid and
+the browsers installed and configured. You may access the grid at
+`http://172.16.202.120:444`, this address will be visible ony to your
+local machine. A VNC server is also available for monitoring the
+progress of your tests at `172.16.202.120:1`, password '123qwe'.
+
+Thank you to [Cees de Groot](cg@cdegroot.com) for the
+[Vagrant Selenium Grid project](https://github.com/cdegroot/vagrant-selenium-grid).
+
 ## Acknowledgements ##
 
 Credits to [mikitebeka/webdriver-clj](https://github.com/mikitebeka/webdriver-clj) for the initial code for this project and many of the low-level wrappers around the Selenium-WebDriver API.
