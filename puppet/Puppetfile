@@ -8,9 +8,6 @@ mod "apt",
 mod "stdlib",
    :git => "git://github.com/puppetlabs/puppetlabs-stdlib.git"
 
-mod "chromedriver",
-   :git => "git://github.com/laurentmoss/puppet-chromedriver.git"
-
 mod "firefox",
    :git => "git://github.com/runthebusiness/puppet-firefox.git"
 

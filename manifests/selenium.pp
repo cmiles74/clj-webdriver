@@ -4,7 +4,43 @@ package { "unzip": ensure => present }
 package { "openjdk-6-jre-headless": ensure => present }
 package { "curl": ensure => present }
 
-class { 'chromedriver': }
+class chromedriver {
+
+  $version      = '2.8'
+  $basename     = "chromedriver_linux32"
+  $tarball      = "${basename}.zip"
+  $tarball_path = "/tmp/${tarball}"
+  $url          = "http://chromedriver.storage.googleapis.com/${version}/${tarball}"
+  $destdir      = "/opt/${basename}"
+
+  package {
+    'chromedriver':  ensure => absent,
+  }
+
+  exec {
+    'download-chromedriver-binary':
+      require => Package['curl', 'unzip'],
+      command => "/usr/bin/curl -L -o ${tarball_path} ${url}",
+      creates => $tarball_path;
+
+    'unpack-chromedriver-binary':
+      command => "/usr/bin/unzip ${tarball_path} -d chromedriver",
+      cwd     => '/opt',
+      creates => $destdir,
+      require => Exec['download-chromedriver-binary'];
+
+    'permissions-chromedriver':
+      command => "/bin/chmod 775 /opt/chromedriver/chromedriver",
+      require => Exec['unpack-chromedriver-binary'];
+  }
+
+  file {
+    '/usr/local/bin/chromedriver':
+      ensure  => link,
+      target  => "/opt/chromedriver/chromedriver",
+      require => Exec['unpack-chromedriver-binary'];
+  }
+}
 
 class phantomjs {
 
@@ -21,6 +57,7 @@ class phantomjs {
 
   exec {
     'download-phantomjs-binary':
+      require => Package['curl'],
       command => "/usr/bin/curl -L -o ${tarball_path} ${url}",
       creates => $tarball_path;
 
@@ -45,6 +82,7 @@ class leiningen {
 
   exec {
     'download-lein':
+      require => Package['curl'],
       command => "/usr/bin/curl -L -o /usr/local/bin/lein ${url}",
       creates => $tarball_path;
 
@@ -94,6 +132,7 @@ class sehub {
 class senode {
   require selenium
   require phantomjs
+  require chromedriver
   require leiningen
 
   package { "firefox": ensure => present }
