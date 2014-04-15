@@ -46,7 +46,7 @@
   (f)
   (if @driver (quit @driver)))
 
-(use-fixtures :once start-server)
+(use-fixtures :once start-server quit-fixture)
 
 ;; RUN TESTS HERE
 
