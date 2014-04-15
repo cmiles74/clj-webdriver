@@ -6,7 +6,7 @@ package { "curl": ensure => present }
 
 class chromedriver {
 
-  $version      = '2.8'
+  $version      = '2.9'
   $basename     = "chromedriver_linux32"
   $tarball      = "${basename}.zip"
   $tarball_path = "/tmp/${tarball}"
@@ -44,11 +44,11 @@ class chromedriver {
 
 class phantomjs {
 
-  $version      = '1.9.2'
-  $basename     = "phantomjs-${version}-linux-i686"
+  $version      = '1.9.7'
+  $basename     = "phantomjs-${version}-linux-x86_64"
   $tarball      = "${basename}.tar.bz2"
   $tarball_path = "/tmp/${tarball}"
-  $url          = "http://phantomjs.googlecode.com/files/${tarball}"
+  $url          = "https://bitbucket.org/ariya/phantomjs/downloads/${tarball}"
   $destdir      = "/opt/${basename}"
 
   package {
@@ -99,7 +99,7 @@ class selenium {
   }
 
   file { "/opt/selenium/selenium-server-standalone.jar":
-     source => "/vagrant/files/opt/selenium/selenium-server-standalone-2.38.0.jar",
+     source => "/vagrant/files/opt/selenium/selenium-server-standalone-2.39.0.jar",
   }
 }
 

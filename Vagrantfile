@@ -1,13 +1,12 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant::Config.run do |config|
-  config.vm.box = "precise32"
+Vagrant.configure("2") do |config|
+  config.vm.box = "precise64"
 
   config.vm.define "seleniumhub" do |senodehub|
     # 202 = 0xCA. Easy, eh?
-    senodehub.vm.network :hostonly, "172.16.202.120"
-    senodehub.vm.host_name = "senodehub.local"
+    senodehub.vm.network "private_network", :ip => "172.16.202.120"
 
     # Install Librarian-puppet first
     senodehub.vm.provision :shell, :path => "shell/main.sh"
