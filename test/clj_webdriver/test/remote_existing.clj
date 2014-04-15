@@ -46,7 +46,7 @@
   (f)
   (if @driver (quit @driver)))
 
-;(use-fixtures :each reset-browser-fixture)
+(use-fixtures :once start-server)
 
 ;; RUN TESTS HERE
 
