@@ -129,7 +129,7 @@ vagrant up
 After Vagrant completes setting up the machine, you will have a
 virtual machine running Ubuntu Precise 32-bit with Selenium Grid and
 the browsers installed and configured. You may access the grid at
-`http://172.16.202.120:444`, this address will be visible ony to your
+`http://172.16.202.120:4444`, this address will be visible ony to your
 local machine. A VNC server is also available for monitoring the
 progress of your tests at `172.16.202.120:1`, password '123qwe'.
 
