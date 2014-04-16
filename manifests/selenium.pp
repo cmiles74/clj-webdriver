@@ -7,7 +7,7 @@ package { "curl": ensure => present }
 class chromedriver {
 
   $version      = '2.9'
-  $basename     = "chromedriver_linux32"
+  $basename     = "chromedriver_linux64"
   $tarball      = "${basename}.zip"
   $tarball_path = "/tmp/${tarball}"
   $url          = "http://chromedriver.storage.googleapis.com/${version}/${tarball}"
