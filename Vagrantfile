@@ -20,6 +20,6 @@ Vagrant.configure("2") do |config|
 
     # Restart Selenium
     senodehub.vm.provision "shell",
-      inline: "/etc/init.d/senode stop; /etc/init.d/sehub start; /etc/init.d/senode start"
+      inline: "sudo service senode stop; sudo service sehub stop; sudo pkill java; sudo pkill phantomjs; sudo /etc/init.d/sehub start && sleep 3 && sudo /etc/init.d/senode start"
   end
 end
